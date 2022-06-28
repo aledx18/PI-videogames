@@ -1,0 +1,24 @@
+.contenedorFormSub{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+.inputVideo{
+    font-size: 14px;
+    border-radius: 4px;
+    border: 2px solid transparent;
+    box-shadow: rgb(0 0 0 / 12%) 0px 1px 3px, rgb(0 0 0 / 24%) 0px 1px 2px;
+    background: rgb(251, 251, 251);
+    transition: all 0.1s ease 0s;
+    height: 30px;
+    margin-right: 5px;
+}
+.inputVideo:focus{
+    border: -1px solid rgb(198, 201, 233);
+}
+.butonNameGame{
+    margin: 0;
+    width: 70px;
+    height: 30px;
+}

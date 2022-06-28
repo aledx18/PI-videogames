@@ -1,25 +1,21 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 import "./App.css";
-import { getAllVideogames } from "./redux/actions";
+import { Route } from "react-router-dom";
+import Home from "./components/Home";
+import Landing from "./components/Landing";
+import Nav from "./components/Nav";
+import DetailGame from "./components/DetailGame";
+import CreateGame from "./components/CreateGame";
 
 function App() {
-  const [videogame, setVideogame] = useState("");
-
-  const dispatch = useDispatch();
-  // dispatch(getAllVideogames(videogame));
-
-  const videoGames = useSelector((state) => state.videogamesLoaded);
-
-  React.useEffect(() => {
-    dispatch(getAllVideogames());
-  }, [dispatch]);
-
   return (
     <div className="App">
-      <h1>Henry Videogames</h1>
-      {videoGames[0] && videoGames[0].map((p) => <h6>{p.name}</h6>)}
-      {/* {videoGames && videoGames.map((p) => <h6>{p.name}</h6>)} */}
+      <Route exact path="/" component={Landing} />
+      <Route exact path="/home" component={Nav} />
+      <Route exact path="/game/:id" component={Nav} />
+      <Route exact path="/game/:id" component={DetailGame} />
+      <Route exact path="/create" component={CreateGame} />
+      <Route exact path="/home" component={Home} />
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import axios from "axios";
 //*llamados al back* :
 
 // PAGINA PRINCIPAL
@@ -14,6 +15,7 @@ export const GET_ALL_VIDEOGAMES = "GET_ALL_VIDEOGAMES";
 export const GET_VIDEOGAMES_NAME = "GET_VIDEOGAMES_NAME";
 export const GET_VIDEOGAME_DETAIL = "GET_VIDEOGAME_DETAIL";
 export const ADD_VIDEOGAME = "ADD_VIDEOGAME";
+export const GET_GENRES = "GET_GENRES";
 
 export function addVideogame(payload) {
   return { type: ADD_VIDEOGAME, payload };
@@ -42,7 +44,6 @@ export function getVideogameName(name) {
       });
   };
 }
-
 export function getVideogameDetail(id) {
   return function (dispatch) {
     return fetch(`http://localhost:3001/videogames/${id}`)
@@ -50,5 +51,20 @@ export function getVideogameDetail(id) {
       .then((json) => {
         dispatch({ type: GET_VIDEOGAME_DETAIL, payload: json });
       });
+  };
+}
+export function createVideogame(payload) {
+  return async function (dispatch) {
+    var json = await axios.post("http://localhost:3001/videogames", payload);
+    return json;
+  };
+}
+export function getGenres() {
+  return async function (dispatch) {
+    const json = await axios.get("http://localhost:3001/genres");
+    return dispatch({
+      type: GET_GENRES,
+      payload: json.data,
+    });
   };
 }

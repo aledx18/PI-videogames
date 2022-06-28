@@ -59,11 +59,17 @@ const getVideogames = async (req, res, next) => {
       if (respuesta) {
         let apiResp = pepe?.map((game) => {
           return {
+            id: game.id,
             name: game.name,
             parent_platforms: game.parent_platforms,
             released: game.released,
             rating: game.rating,
-            genres: game.genres,
+            genres: game.genres.map((g) => {
+              return {
+                id: g.id,
+                name: g.name,
+              };
+            }),
             image: game.background_image,
           };
         });
@@ -85,7 +91,8 @@ const getVideogames = async (req, res, next) => {
  * @returns Los videojuegos que coincidan con el nombre que busca el usuario.
  */
 const getVideogamesName = async (req, res, next) => {
-  const { nombre } = req.query;
+  let { nombre } = req.query;
+
   try {
     const respuestaAPi = await axios.get(
       `https://api.rawg.io/api/games?search=${nombre}&key=${API_KEY}`
@@ -98,9 +105,12 @@ const getVideogamesName = async (req, res, next) => {
         attributes: ["id", "name"],
         through: { attributes: [] },
       },
-      where: { name: nombre },
     });
-    let resultadoFinal = [...resDbVideogames, ...prueba];
+    let pepe = resDbVideogames.filter((n) =>
+      n.name.toLowerCase().includes(nombre.toLowerCase())
+    );
+
+    let resultadoFinal = [...pepe, ...prueba];
     return res.json(resultadoFinal.slice(0, 16));
   } catch (error) {
     next(error);

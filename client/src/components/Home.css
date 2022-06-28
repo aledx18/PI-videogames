@@ -1,0 +1,19 @@
+H2{
+    margin: 0;
+}
+
+.contenedorPrincipalGames {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  gap: 8px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+.HomeCard{
+  width: 100%;
+}
+.conted{
+  background-color: #293241;
+}

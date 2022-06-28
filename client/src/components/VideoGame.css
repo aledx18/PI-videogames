@@ -1,0 +1,41 @@
+.contenedorJuego {
+  border: 1px solid rgb(146, 146, 146);
+  width: 340px;
+  
+  border-radius: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fffdfd;
+  margin-top: 2px;
+  margin-bottom: 5px;
+  border: 1px solid rgb(221, 221, 221);
+  
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+.contenedorJuego:hover{
+    opacity: 1;
+}
+.imagepepe {
+  width: 100%;
+  height: 210px;
+  background-color: #293241;
+}
+.infoGame{
+    padding: 10px;
+    color: #242424;
+}
+.textDecoration{
+  text-decoration: none;
+}
+
+.imagepepe img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  background-position: center;
+  background-color: #293241;
+  opacity: 1;
+  border-radius: 5% 5% 0% 0%;
+}
