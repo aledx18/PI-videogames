@@ -28,7 +28,7 @@ module.exports = (sequelize) => {
       defaultValue: 5.5,
     },
     parent_platforms: {
-      type: DataTypes.ENUM("Xbox", "PlayStation", "PC"),
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
     },
     image: {

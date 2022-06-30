@@ -1,0 +1,17 @@
+.paginacionContenedor{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+}
+
+.paginacionContenedor img {
+    width: 50px;
+    
+    cursor: pointer;
+}
+
+.inputPaginacion{
+    width: 40px;
+}

@@ -6,7 +6,6 @@ import "./Home.css";
 import { useState } from "react";
 import Paginacion from "./Paginacion";
 
-
 function Home() {
   const dispatch = useDispatch();
 
@@ -15,19 +14,30 @@ function Home() {
   const [pagina, setPagina] = useState(1);
   const [porPagina, setPorPagina] = useState(15);
 
-  const maximo = videoGames.length / porPagina; 
+  const maximo = videoGames.length / porPagina;
 
- 
   React.useEffect(() => {
     dispatch(getAllVideogames());
-    
   }, [dispatch]);
 
   return (
     <div className="conted">
       <div className="HomeCard">
         <div className="contenedorPrincipalGames">
-          {videoGames &&
+          {!videoGames.length > 0 ? (
+            <div className="cagando">
+              <div className="loader">
+                <div className="loader-square"></div>
+                <div className="loader-square"></div>
+                <div className="loader-square"></div>
+                <div className="loader-square"></div>
+                <div className="loader-square"></div>
+                <div className="loader-square"></div>
+                <div className="loader-square"></div>
+              </div>
+            </div>
+          ) : (
+            videoGames &&
             videoGames
               .slice(
                 (pagina - 1) * porPagina,
@@ -41,7 +51,8 @@ function Home() {
                   img={game.image || game.background_image}
                   genero={game.genres.map((g) => g.name)}
                 />
-              ))}
+              ))
+          )}
         </div>
       </div>
       <Paginacion setPagina={setPagina} maximo={maximo} pagina={pagina} />

@@ -4,6 +4,8 @@ import {
   GET_VIDEOGAME_DETAIL,
   ADD_VIDEOGAME,
   GET_GENRES,
+  GET_PLATFORMS,
+  ORDER_GAME,
 } from "../actions/index";
 
 const initialState = {
@@ -12,6 +14,7 @@ const initialState = {
   videogamesLoadedName: [],
   gameDetail: [],
   genres: [],
+  platforms: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -35,13 +38,68 @@ const rootReducer = (state = initialState, action) => {
     case ADD_VIDEOGAME:
       return {
         ...state,
+        videogamesLoaded: [action.payload, ...state.videogamesLoaded],
       };
     case GET_GENRES:
       return {
         ...state,
         genres: action.payload,
       };
-
+    case ORDER_GAME:
+      var ordern;
+      switch (action.payload) {
+        case "A-Z":
+          console.log("culo");
+          ordern = function (a, b) {
+            if (a.name < b.name) {
+              return -1;
+            }
+            if (a.name > b.name) {
+              return 1;
+            }
+            return 0;
+          };
+          break;
+        case "Z-A":
+          ordern = function (a, b) {
+            if (a.name < b.name) {
+              return 1;
+            }
+            if (a.name > b.name) {
+              return -1;
+            }
+            return 0;
+          };
+          break;
+        case "rating asc":
+          ordern = function (a, b) {
+            if (a.rating < b.rating) {
+              return 1;
+            }
+            if (a.rating > b.rating) {
+              return -1;
+            }
+            return 0;
+          };
+          break;
+        case "rating desc":
+          ordern = function (a, b) {
+            if (a.rating < b.rating) {
+              return -1;
+            }
+            if (a.rating > b.rating) {
+              return 1;
+            }
+            return 0;
+          };
+          break;
+        default:
+          break;
+      }
+      return {
+        ...state,
+        videogamesLoaded: [...state.videogamesLoaded.sort(ordern)],
+      };
     default:
       return {
         ...state,

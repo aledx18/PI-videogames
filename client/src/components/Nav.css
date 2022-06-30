@@ -7,7 +7,7 @@
   }
   .nav > .nav-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
   }
   
@@ -22,7 +22,11 @@
     font-size: 22px;
     color: rgb(0, 0, 0);
     cursor: pointer;
-    padding: 10px;
+    padding-left: 5px;
+  }
+  .nav-title img{
+  width: 50px;
+    
   }
   h5{
     margin: 0;

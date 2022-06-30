@@ -61,7 +61,9 @@ const getVideogames = async (req, res, next) => {
           return {
             id: game.id,
             name: game.name,
-            parent_platforms: game.parent_platforms,
+            parent_platforms: game.parent_platforms?.map(
+              (plt) => plt.platform.name
+            ),
             released: game.released,
             rating: game.rating,
             genres: game.genres.map((g) => {
@@ -97,7 +99,24 @@ const getVideogamesName = async (req, res, next) => {
     const respuestaAPi = await axios.get(
       `https://api.rawg.io/api/games?search=${nombre}&key=${API_KEY}`
     );
-    const prueba = respuestaAPi.data.results;
+    const prueba = respuestaAPi.data.results.map((game) => {
+      return {
+        id: game.id,
+        name: game.name,
+        parent_platforms: game.parent_platforms?.map(
+          (plt) => plt.platform.name
+        ),
+        released: game.released,
+        rating: game.rating,
+        genres: game.genres.map((g) => {
+          return {
+            id: g.id,
+            name: g.name,
+          };
+        }),
+        image: game.background_image,
+      };
+    });
     // base de datos
     const resDbVideogames = await Videogame.findAll({
       include: {
@@ -135,7 +154,7 @@ const postVideogame = async (req, res, next) => {
       if (nuevo) res.json({ message: "creado", data: nuevo });
       else res.json({ message: "Error, no se pudo crear" });
     } catch (error) {
-      res.send(error, "nop");
+      res.send(error);
     }
   } else {
     res.json({ message: "Error no viene el game en el body" });
@@ -159,7 +178,30 @@ const getVideogamesId = async (req, res, next) => {
         const respAPi = await axios.get(
           `https://api.rawg.io/api/games/${idEntero}?key=${API_KEY}`
         );
-        return res.json(respAPi.data);
+        //mapear id plataforma  Los campos mostrados en la ruta principal para cada videojuegos (imagen, nombre, y géneros)
+        // Descripción
+        // Fecha de lanzamiento
+        // Rating
+        // Plataformas
+        let resFinal = {
+          id: respAPi.data.id,
+          name: respAPi.data.name,
+          parent_platforms: respAPi.data.parent_platforms?.map(
+            (plt) => plt.platform.name
+          ),
+          released: respAPi.data.released,
+          description: respAPi.data.description,
+          rating: respAPi.data.rating,
+          genres: respAPi.data.genres.map((g) => {
+            return {
+              id: g.id,
+              name: g.name,
+            };
+          }),
+          image: respAPi.data.background_image,
+        };
+
+        return res.json(resFinal);
       }
       const resDbVideogames = await Videogame.findAll({
         where: { id: id },
@@ -169,7 +211,7 @@ const getVideogamesId = async (req, res, next) => {
           through: { attributes: [] },
         },
       });
-      return res.json(resDbVideogames);
+      return res.json(resDbVideogames[0]);
     } catch (error) {
       next(error);
     }
