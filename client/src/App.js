@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="App">
       <Route exact path="/" component={Landing} />
-      <Route exact path="/home" component={Nav} />
+      {/* <Route exact path="/home" component={Nav} /> */}
       <Route exact path="/game/:id" component={Nav} />
       <Route exact path="/game/:id" component={DetailGame} />
       <Route exact path="/create" component={CreateGame} />

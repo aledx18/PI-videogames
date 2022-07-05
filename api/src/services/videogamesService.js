@@ -78,7 +78,7 @@ const getVideogames = async (req, res, next) => {
         let resultFinal = [...DbVideogames, ...apiResp];
         return res.json(resultFinal);
       } else {
-        res.json({ message: "Error en respuesta(api)" });
+        res.status(200).json({ message: "Error en respuesta(api)" });
       }
     } catch (error) {
       next(error);

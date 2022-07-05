@@ -12,6 +12,15 @@
     justify-content: center;
     
 }
+
+.link_create_game {
+    height: 20px;
+    width: 100px;
+    
+}
+.link_create_game img{
+    width: 70px;
+}
 .gameDetailImagen_contente img{
     object-fit: cover;
     

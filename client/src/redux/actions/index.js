@@ -18,6 +18,8 @@ export const ADD_VIDEOGAME = "ADD_VIDEOGAME";
 export const GET_GENRES = "GET_GENRES";
 export const GET_PLATFORMS = "GET_PLATFORMS";
 export const ORDER_GAME = "ORDER_GAME";
+export const FILTER_GENRE = "FILTER_GENRE";
+export const FILTER_CREATED = "FILTER_CREATED";
 
 export function addVideogame(payload) {
   return { type: ADD_VIDEOGAME, payload };
@@ -36,27 +38,33 @@ export function getAllVideogames() {
       });
   };
 }
-export function orderGame(payload) {
-  console.log(payload);
-  return { type: ORDER_GAME, payload };
-}
-
-// export function getPlatforms() {
+// export function getAllVideogames() {
 //   return async function (dispatch) {
-//     const jsonPlat = await axios.get("http://localhost:3001/videogames");
-//     return dispatch({
-//       type: GET_PLATFORMS,
-//       payload: jsonPlat.data,
-//     });
+//     let res = await axios.get(`http://localhost:3001/videogames`);
+//     return dispatch({ type: GET_ALL_VIDEOGAMES, payload: res.data });
 //   };
 // }
+
+export function orderGame(payload) {
+  return { type: ORDER_GAME, payload };
+}
+export function filterGameGenre(payload) {
+  return { type: FILTER_GENRE, payload };
+}
+export function filterGameCreated(payload) {
+  return { type: FILTER_CREATED, payload };
+}
 
 export function getVideogameName(name) {
   return function (dispatch) {
     return fetch(`http://localhost:3001/videogames/?nombre=${name}`)
       .then((response) => response.json())
       .then((json) => {
-        dispatch({ type: GET_VIDEOGAMES_NAME, payload: json });
+        if (json.length !== 0) {
+          dispatch({ type: GET_VIDEOGAMES_NAME, payload: json });
+        } else {
+          alert("Videogame no encontrado");
+        }
       });
   };
 }

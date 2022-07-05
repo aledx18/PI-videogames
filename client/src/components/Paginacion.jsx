@@ -4,6 +4,7 @@ import "./Paginacion.css"
 
 function Paginacion({ pagina, setPagina, maximo }) {
   const [input, setInput] = useState(1);
+  
 
   const nextPage = () => {
     if (pagina < Math.ceil(maximo)) {
@@ -26,11 +27,9 @@ function Paginacion({ pagina, setPagina, maximo }) {
 
   return (
     <div className="paginacionContenedor">
-      {/* <button disabled={pagina === 1 || pagina < 1} onClick={previousPage}>
-        PREV
-      </button> */}
+     
       <img  onClick={previousPage} src="https://img.icons8.com/stickers/100/000000/left.png"/>
-      <input disabled name="page" className="inputPaginacion" autoComplete="off" value={input} onChange={e=> onChange(e)} />
+      <input disabled name="page" className="inputPaginacion" autoComplete="off" value={pagina} onChange={e=> onChange(e)} />
       <p>De {Math.ceil(maximo)}</p>
       <img onClick={nextPage} src="https://img.icons8.com/stickers/100/000000/right.png"/>
       {/* <div className="button_paginacion">

@@ -13,7 +13,7 @@ function DetailGame(props) {
     dispatch(getVideogameDetail(idGame));
   }, [dispatch]);
 
-  console.log(gameDetail);
+  
 
   return (
     <div className="gameDetailContenedor">
@@ -47,7 +47,7 @@ function DetailGame(props) {
           <div className="box_descrip">
             <div className="platf_cont_">
               {gameDetail.genres.map((g, i) => (
-                <h4 className="titulo_genres" key={i.id}>{g.name}</h4>
+                <h4 className="titulo_genres" key={i}>{g.name}</h4>
               ))}
             </div>
             <div className="gameDetailImagen_contente">

@@ -5,16 +5,18 @@ import VideoGame from "./VideoGame";
 import "./Home.css";
 import { useState } from "react";
 import Paginacion from "./Paginacion";
+import Nav from "./Nav";
 
 function Home() {
   const dispatch = useDispatch();
 
-  const videoGames = useSelector((state) => state.videogamesLoaded);
+  const {videogamesLoaded} = useSelector((state) => state);
+
 
   const [pagina, setPagina] = useState(1);
   const [porPagina, setPorPagina] = useState(15);
 
-  const maximo = videoGames.length / porPagina;
+  const maximo = videogamesLoaded.length / porPagina;
 
   React.useEffect(() => {
     dispatch(getAllVideogames());
@@ -22,9 +24,10 @@ function Home() {
 
   return (
     <div className="conted">
+      <Nav setPagina={setPagina}/>
       <div className="HomeCard">
         <div className="contenedorPrincipalGames">
-          {!videoGames.length > 0 ? (
+          {!videogamesLoaded.length > 0 ? (
             <div className="cagando">
               <div className="loader">
                 <div className="loader-square"></div>
@@ -37,19 +40,19 @@ function Home() {
               </div>
             </div>
           ) : (
-            videoGames &&
-            videoGames
+            videogamesLoaded &&
+            videogamesLoaded
               .slice(
                 (pagina - 1) * porPagina,
                 (pagina - 1) * porPagina + porPagina
               )
-              .map((game) => (
+              ?.map((game) => (
                 <VideoGame
                   key={game.id}
                   id={game.id}
                   name={game.name}
                   img={game.image || game.background_image}
-                  genero={game.genres.map((g) => g.name)}
+                  genero={game.genres?.map((g) => g.name)}
                 />
               ))
           )}

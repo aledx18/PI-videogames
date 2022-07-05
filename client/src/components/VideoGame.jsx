@@ -12,7 +12,7 @@ function VideoGame({id, img, name, genero }) {
       </div>
       <div className="infoGame">
       <Link className="textDecoration" to={`/game/${id}`}><h4>{name}</h4></Link>
-        <h6>{genero.join(" ")}</h6>
+        <h6>{genero?.join(" ")}</h6>
       </div>
     </div>
   );
