@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { getAllVideogames, getVideogameName } from "../redux/actions";
 import "./SearchBar.css";
 
-function SearchBar() {
+function SearchBar({setPagina}) {
   const [gameName, setGameName] = React.useState("");
 
   const dispatch = useDispatch();
@@ -13,6 +13,7 @@ function SearchBar() {
       event.preventDefault();
       dispatch(getVideogameName(gameName));
       setGameName("");
+      setPagina(1)
     }
     else{
       event.preventDefault();

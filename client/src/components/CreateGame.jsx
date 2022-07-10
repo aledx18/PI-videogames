@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import { createVideogame } from "../redux/actions";
+import { createVideogame, getAllVideogames } from "../redux/actions";
 import "./CreateGame.css";
 
 function validate(input) {
@@ -52,6 +52,12 @@ function CreateGame() {
     { name: "Web", id: 13 },
   ];
 
+  React.useEffect(() => {
+    return() =>{
+      dispatch(getAllVideogames())
+    }
+  }, [dispatch]);
+
   const [errors, setErrors] = useState({});
 
   const [input, setInput] = useState({
@@ -65,28 +71,40 @@ function CreateGame() {
   });
 
   function handdleSelect(e) {
-    setInput({
-      ...input,
-      genero: [...input.genero, e.target.value],
-    });
-    setErrors(
-      validate({
+    if(!input.genero.includes(e.target.value))
+    {
+      setInput({
         ...input,
-        [e.target.name]: e.target.value,
-      })
-    );
+        genero: [...input.genero, e.target.value],
+      });
+      setErrors(
+        validate({
+          ...input,
+          [e.target.name]: e.target.value,
+        })
+      );
+    }
+    else{
+      alert("No se puede repetir el genero")
+    }
   }
   function handdleSelectDos(e) {
-    setInput({
-      ...input,
-      parent_platforms: [...input.parent_platforms, e.target.value],
-    });
-    setErrors(
-      validate({
+    if(!input.parent_platforms.includes(e.target.value))
+    {
+      setInput({
         ...input,
-        [e.target.name]: e.target.value,
-      })
-    );
+        parent_platforms: [...input.parent_platforms, e.target.value],
+      });
+      setErrors(
+        validate({
+          ...input,
+          [e.target.name]: e.target.value,
+        })
+      );
+    }
+    else{
+      alert("No se puede repetir la plataforma")
+    }
   }
 async function handleSubmit(e) {
     e.preventDefault();
@@ -196,7 +214,7 @@ async function handleSubmit(e) {
               <input
                 type="text"
                 name="released"
-                placeholder="released mm dd yyyy "
+                placeholder="released yyyy-mm-dd "
                 onChange={handleChange}
                 value={input.released}
                 className="pure-input-1"

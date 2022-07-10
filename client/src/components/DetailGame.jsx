@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getVideogameDetail } from "../redux/actions";
+import { getVideogameDetail, resetDetail } from "../redux/actions";
 import "./DetailGame.css";
 
 function DetailGame(props) {
@@ -11,10 +11,11 @@ function DetailGame(props) {
   const idGame = props.match.params.id;
   React.useEffect(() => {
     dispatch(getVideogameDetail(idGame));
+    return()=>{
+      dispatch(resetDetail())
+    }
   }, [dispatch]);
-
   
-
   return (
     <div className="gameDetailContenedor">
       {!Object.values(gameDetail).length > 0 ? (

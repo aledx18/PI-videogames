@@ -18,6 +18,7 @@ function Nav({setPagina}) {
 
   const handleOrderBy = (e) => {
     e.preventDefault();
+    setPagina(1)
     dispatch(orderGame(e.target.value));
   };
   const handdleSelect = (e) => {
@@ -27,10 +28,12 @@ function Nav({setPagina}) {
   };
   const handdleSelectCreated = (e) => {
     e.preventDefault();
+    setPagina(1)
     dispatch(filterGameCreated(e.target.value));
   };
   const allSelect = (p) => {
     p.preventDefault();
+    setPagina(1)
     dispatch(dispatch(getAllVideogames));
   };
 
@@ -98,7 +101,7 @@ function Nav({setPagina}) {
         <Link className="nav-title-link" to={"/create"}>
           <h5>Crear Game</h5>
         </Link>
-        <SearchBar />
+        <SearchBar setPagina={setPagina}/>
       </div>
     </div>
   );

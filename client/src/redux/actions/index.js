@@ -10,21 +10,19 @@ import axios from "axios";
 
 //PAGINA DE CREACION DE VIDEOGAME
 //hacer un post localhost:3001/videogames
-
 export const GET_ALL_VIDEOGAMES = "GET_ALL_VIDEOGAMES";
 export const GET_VIDEOGAMES_NAME = "GET_VIDEOGAMES_NAME";
 export const GET_VIDEOGAME_DETAIL = "GET_VIDEOGAME_DETAIL";
 export const ADD_VIDEOGAME = "ADD_VIDEOGAME";
 export const GET_GENRES = "GET_GENRES";
-export const GET_PLATFORMS = "GET_PLATFORMS";
 export const ORDER_GAME = "ORDER_GAME";
 export const FILTER_GENRE = "FILTER_GENRE";
 export const FILTER_CREATED = "FILTER_CREATED";
+export const RESET_DETAIL = "RESET_DETAIL";
 
 export function addVideogame(payload) {
   return { type: ADD_VIDEOGAME, payload };
 }
-
 export function getAllVideogames() {
   return function (dispatch) {
     return fetch(`http://localhost:3001/videogames`)
@@ -38,13 +36,6 @@ export function getAllVideogames() {
       });
   };
 }
-// export function getAllVideogames() {
-//   return async function (dispatch) {
-//     let res = await axios.get(`http://localhost:3001/videogames`);
-//     return dispatch({ type: GET_ALL_VIDEOGAMES, payload: res.data });
-//   };
-// }
-
 export function orderGame(payload) {
   return { type: ORDER_GAME, payload };
 }
@@ -54,7 +45,9 @@ export function filterGameGenre(payload) {
 export function filterGameCreated(payload) {
   return { type: FILTER_CREATED, payload };
 }
-
+export function resetDetail(payload) {
+  return { type: RESET_DETAIL, payload };
+}
 export function getVideogameName(name) {
   return function (dispatch) {
     return fetch(`http://localhost:3001/videogames/?nombre=${name}`)
@@ -86,7 +79,6 @@ export function createVideogame(payload) {
     });
   };
 }
-
 export function getGenres() {
   return async function (dispatch) {
     const json = await axios.get("http://localhost:3001/genres");

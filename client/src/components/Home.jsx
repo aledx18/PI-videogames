@@ -19,7 +19,7 @@ function Home() {
   const maximo = videogamesLoaded.length / porPagina;
 
   React.useEffect(() => {
-    dispatch(getAllVideogames());
+    if(!videogamesLoaded.length)dispatch(getAllVideogames());
   }, [dispatch]);
 
   return (
@@ -41,7 +41,7 @@ function Home() {
             </div>
           ) : (
             videogamesLoaded &&
-            videogamesLoaded
+            videogamesLoaded  
               .slice(
                 (pagina - 1) * porPagina,
                 (pagina - 1) * porPagina + porPagina

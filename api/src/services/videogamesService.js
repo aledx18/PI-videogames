@@ -5,24 +5,6 @@ const { API_KEY } = process.env;
 
 const axios = require("axios");
 
-// const getVideogames = async (req, res) => {
-//   try {
-//     const respuesta = await fetch(
-//       `https://api.rawg.io/api/games?key=${API_KEY}`
-//     )
-//       .then((r) => r.json())
-//       .then((recurso) => {
-//         if (recurso.main !== undefined) {
-//         } else {
-//           alert("error");
-//         }
-//       });
-//   } catch (error) {
-//     next(error);
-//   }
-
-// };
-
 /**
  * Obtiene todos los videojuegos de la base de datos y de la API, y luego los devuelve
  * @param req - El objeto de la solicitud.

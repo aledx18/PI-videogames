@@ -7,6 +7,7 @@ import {
   FILTER_GENRE,
   ORDER_GAME,
   FILTER_CREATED,
+  RESET_DETAIL,
 } from "../actions/index";
 
 const initialState = {
@@ -116,32 +117,26 @@ const rootReducer = (state = initialState, action) => {
         videogamesLoaded: [...newArrFilter],
       };
     case FILTER_CREATED:
-      // let newArrFilterCreate = state.videogamesLoaded.filter((p) => {
-      //   var boo = false;
-      //   p.forEach((element) => {
-      //     if (element.created === action.payload) {
-      //       boo = true;
-      //     }
-      //   });
-      //   return boo;
-      // });
-      //let newArrFilterCreate = state.videogamesLoaded.map((p) => p.created);
       state.videogamesLoaded = state.Aux;
+      var newArrFilterCreate = [];
       if (action.payload === "false") {
-        var newArrFilterCreate = state.videogamesLoaded.filter(
+        newArrFilterCreate = state.videogamesLoaded.filter(
           (p) => p.created === false
         );
       } else {
-        var newArrFilterCreate = state.videogamesLoaded.filter(
+        newArrFilterCreate = state.videogamesLoaded.filter(
           (p) => p.created !== false
         );
       }
-
       return {
         ...state,
         videogamesLoaded: newArrFilterCreate,
       };
-
+    case RESET_DETAIL:
+      return {
+        ...state,
+        gameDetail: [],
+      };
     default:
       return {
         ...state,
